@@ -1,19 +1,15 @@
 package com.iteso.sesion13_scrollabletab;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,82 +22,97 @@ import java.util.ArrayList;
  */
 
 public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHolder> {
-
-    ArrayList<itemProduct> products;
+    private ArrayList<itemProduct> mDataSet;
     private Context context;
 
-    public AdapterProduct(ArrayList<itemProduct> products, Context context){
-        this.products = products;
+
+    public AdapterProduct(Context context, ArrayList<itemProduct> myDataSet) {
+        mDataSet = myDataSet;
         this.context = context;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView miTitle, miStore, miLocation, miPhone;
-        public ImageView miImage, miThumbnail;
-        public Button detail;
-
-        public ViewHolder(View v){
-            super(v);
-            miTitle = v.findViewById(R.id.item_product_title);
-            miStore = v.findViewById(R.id.item_product_store);
-            miLocation = v.findViewById(R.id.item_product_location);
-            miPhone = v.findViewById(R.id.item_product_phone);
-            miImage = v.findViewById(R.id.item_product_image);
-            miThumbnail = v.findViewById(R.id.item_product_thumbnail);
-            detail = v.findViewById(R.id.item_product_detail);
-        }
-    }
-
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product, parent, false);
+    @Override
+    public AdapterProduct.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                        int viewType) {
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_product, parent, false);
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
 
-    public void
-    onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.miTitle.setText(products.get(position).getTitle());
-        holder.miStore.setText(products.get(position).getStore());
-        holder.miLocation.setText(products.get(position).getLocation());
-        holder.miPhone.setText(products.get(position).getPhone());
-        holder.miImage.setImageDrawable(products.get(position).getImage());
-        holder.miThumbnail.setImageDrawable(products.get(position).getThumbnail());
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public Button mDetail;
+        public TextView mProductTitle;
+        public TextView mProductStore;
+        public TextView mProductLocation;
+        public TextView mProductPhone;
+        public ImageView mProductImage;
+        public ImageView mProductThumbnail;
+        public RelativeLayout mEventLayout;
 
-        holder.miPhone.setOnClickListener(new View.OnClickListener() {
+        public ViewHolder(View v) {
+            super(v);
+            mEventLayout = (RelativeLayout) v.findViewById(R.id.item_product_layout);
+            mDetail = (Button) v.findViewById(R.id.item_product_detail);
+            mProductTitle = (TextView) v.findViewById(R.id.item_product_title);
+            mProductStore = (TextView) v.findViewById(R.id.item_product_store);
+            mProductLocation = (TextView) v.findViewById(R.id.item_product_location);
+            mProductPhone = (TextView) v.findViewById(R.id.item_product_phone);
+            mProductImage = (ImageView) v.findViewById(R.id.item_product_image);
+            mProductThumbnail = (ImageView) v.findViewById(R.id.item_product_thumbnail);
+        }}
+
+
+
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+            holder.mProductTitle.setText(mDataSet.get(position).getTitle());
+            holder.mProductStore.setText(mDataSet.get(position).getStore());
+            holder.mProductLocation.setText(mDataSet.get(position).getLocation());
+            holder.mProductPhone.setText(mDataSet.get(position).getPhone());
+            switch(mDataSet.get(position).getImage()){
+                case 0:
+                    holder.mProductImage.setImageResource(R.drawable.mac); break;
+                case 1:
+                    holder.mProductImage.setImageResource(R.drawable.alienware); break;
+                case 2:
+                    holder.mProductImage.setImageResource(R.drawable.lanix);break;
+            }
+
+            switch (mDataSet.get(position).getThumbnail()){
+            case 0:
+                holder.mProductThumbnail.setImageResource(R.drawable.bestbuy);
+                 break;
+            case 1:
+                holder.mProductThumbnail.setImageResource(R.drawable.dell);
+                break;
+            case 2:
+                holder.mProductThumbnail.setImageResource(R.drawable.logotienda);
+                break;
+        }
+
+
+        holder.mProductPhone.setOnClickListener(new View.OnClickListener() {
                                               @Override
                                               public void onClick(View view) {
                                                   Intent call = new Intent (Intent.ACTION_DIAL, Uri.parse("tel: "+
-                                                          products.get(position).getPhone()));
+                                                          mDataSet.get(position).getPhone()));
                                                   context.startActivity(call);
                                               }
-
-
-
-
     });
 
-        holder.detail.setOnClickListener(new View.OnClickListener() {
+        holder.mDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context,products.get(position).toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(context,mDataSet.get(position).toString(),Toast.LENGTH_LONG).show();
             }
         });
 
-        holder.miImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context,products.get(position).toString(),Toast.LENGTH_LONG).show();
-            }
-        });
-        
     }
     public int getItemCount(){
-        return products.size();
+        return mDataSet.size();
     }
-
-
-
 
 
 
 }
+

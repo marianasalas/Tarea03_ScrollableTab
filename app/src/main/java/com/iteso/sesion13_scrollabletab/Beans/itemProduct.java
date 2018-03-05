@@ -22,18 +22,26 @@ import org.w3c.dom.Text;
  */
 
 public class itemProduct {
-    private String title, store, location, phone;
-    private Drawable image, thumbnail;
+    private String title, store, location, phone, description;
+    private int image, thumbnail;
 
+    public itemProduct(){
+        image = 0;
+        title = "";
+        store = "";
+        location = "";
+        phone = "";
+        description = "";
+    }
 
-
-    public itemProduct(String title, String store, String location, String phone, Drawable image, Drawable thumbnail) {
+    public itemProduct(String title, String store, String location, String phone, String description, int image, int thumbnail) {
         this.title = title;
         this.store = store;
         this.image = image;
         this.thumbnail = thumbnail;
         this.location = location;
         this.phone = phone;
+        this.description = description;
     }
 
     public String getStore() {
@@ -67,31 +75,40 @@ public class itemProduct {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    public Drawable getImage() {
+    public int getImage() {
         return image;
     }
 
-    public void setImage(Drawable image) {
+    public void setImage(int image) {
         this.image = image;
     }
 
-    public Drawable getThumbnail() {
+    public int getThumbnail() {
         return thumbnail;
     }
 
-    public void setThumbnail(Drawable thumbnail) {
+    public void setThumbnail(int thumbnail) {
         this.thumbnail = thumbnail;
+    }
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 
     @Override
     public String toString() {
         return "itemProduct{" +
-                "title='" + title + '\'' +
+                "product='" + title + '\'' +
                 ", store='" + store + '\'' +
                 ", location='" + location + '\'' +
                 ", phone='" + phone + '\'' +
-                ", description= 'Lorem Ipsum....'"+
+                ", description= '"+ description + '\'' +
                 '}';
     }
 

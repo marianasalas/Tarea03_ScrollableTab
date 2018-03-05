@@ -1,7 +1,5 @@
 package com.iteso.sesion13_scrollabletab;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -21,8 +19,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.iteso.sesion13_scrollabletab.Beans.itemProduct;
 
@@ -107,9 +103,6 @@ public class ActivityMain extends AppCompatActivity {
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
 
-        public PlaceholderFragment() {
-        }
-
         /**
          * Returns a new instance of this fragment for the given section
          * number.
@@ -128,24 +121,32 @@ public class ActivityMain extends AppCompatActivity {
 
             View rootView = inflater.inflate(R.layout.fragment_activity_main, container, false);
             RecyclerView recyclerView = rootView.findViewById(R.id.fragment_recycler_view);
-            recyclerView.setHasFixedSize(true);
 
             LinearLayoutManager miLayoutManager = new LinearLayoutManager(getActivity());
             recyclerView.setLayoutManager(miLayoutManager);
 
 
             ArrayList<itemProduct> products = new ArrayList<>();
-            products.add(new itemProduct("Mac", "BestBuy", "location", "3558964120", getResources().getDrawable(R.drawable.mac), getResources().getDrawable(R.drawable.bestbuy) ));
-            products.add(new itemProduct("Alienware", "DELL",  "", "3356789410", getResources().getDrawable(R.drawable.alienware), getResources().getDrawable(R.drawable.dell)));
-            products.add(new itemProduct("Lanix", "Saint Jhonny",  "", "555555555", getResources().getDrawable(R.drawable.lanix), getResources().getDrawable(R.drawable.logotienda)));
 
-            AdapterProduct adapterProduct = new AdapterProduct(products,getActivity());
+            products.add(new itemProduct(getString(R.string.title_item1),
+                    getString(R.string.store_item1), getString(R.string.location_item1),
+                    getString(R.string.phone_item1),getString(R.string.description_item1),
+                    0, 0 ));
+
+            products.add(new itemProduct(getString(R.string.title_item2),
+                    getString(R.string.store_item2), getString(R.string.location_item2),
+                    getString(R.string.phone_item2),getString(R.string.description_item2),
+                    0, 0 ));
+
+            products.add(new itemProduct(getString(R.string.title_item3),
+                    getString(R.string.store_item3), getString(R.string.location_item3),
+                    getString(R.string.phone_item3),getString(R.string.description_item3),
+                    0, 0 ));
+
+            AdapterProduct adapterProduct = new AdapterProduct(getActivity(), products);
             recyclerView.setAdapter(adapterProduct);
             return rootView;
         }
-
-
-
     }
 
     /**
@@ -161,8 +162,18 @@ public class ActivityMain extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            switch (position){
+                case 0:
+                    return new FragmentTechnology();
+                case 1:
+                    return new FragmentHome();
+                case 2:
+                    return new FragmentElectronics();
+                default:
+                    return new FragmentTechnology();
+
+            }
+
         }
 
         @Override
@@ -173,9 +184,9 @@ public class ActivityMain extends AppCompatActivity {
 
         public CharSequence getPageTitle(int position){
             switch (position){
-                case 0: return "Tecnology";
-                case 1: return "Home";
-                case 2: return "Electronics";
+                case 0: return getString(R.string.title_section1).toUpperCase();
+                case 1: return getString(R.string.title_section2).toUpperCase();
+                case 2: getString(R.string.title_section3).toUpperCase();
             }
             return null;
         }
