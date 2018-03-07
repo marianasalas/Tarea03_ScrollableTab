@@ -1,5 +1,7 @@
 package com.iteso.sesion13_scrollabletab;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -149,6 +151,17 @@ public class ActivityMain extends AppCompatActivity {
         }
     }
 
+    FragmentTechnology fragmentTechnology;
+
+
+    public void onActivityResult(int requestCode,int resultCode, Intent data){
+        if(requestCode == 1){
+            if(resultCode == Activity.RESULT_OK){
+                fragmentTechnology.onActivityResult(requestCode, resultCode, data);
+            }
+        }
+    }
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -164,7 +177,10 @@ public class ActivityMain extends AppCompatActivity {
             // getItem is called to instantiate the fragment for the given page.
             switch (position){
                 case 0:
-                    return new FragmentTechnology();
+                    if( fragmentTechnology== null){
+                        fragmentTechnology = new FragmentTechnology();
+                    }
+                    return fragmentTechnology;
                 case 1:
                     return new FragmentHome();
                 case 2:

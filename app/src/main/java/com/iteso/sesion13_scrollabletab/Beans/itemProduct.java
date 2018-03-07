@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.net.ParseException;
 import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,9 +24,21 @@ import org.w3c.dom.Text;
  * Created by Mariana Salas on 26/02/2018.
  */
 
-public class itemProduct {
+public class itemProduct implements Parcelable{
     private String title, store, location, phone, description;
-    private int image, thumbnail;
+    private int image;
+    private int thumbnail;
+    private int code;
+
+    public itemProduct (Parcel in){
+        image = in.readInt();
+        title= in.readString();
+        store = in.readString();
+        location = in.readString();
+        phone = in.readString();
+        description = in.readString();
+
+    }
 
     public itemProduct(){
         image = 0;
@@ -32,6 +47,7 @@ public class itemProduct {
         location = "";
         phone = "";
         description = "";
+        code = 1;
     }
 
     public itemProduct(String title, String store, String location, String phone, String description, int image, int thumbnail) {
@@ -42,6 +58,33 @@ public class itemProduct {
         this.location = location;
         this.phone = phone;
         this.description = description;
+    }
+
+    public static final Creator<itemProduct> CREATOR = new Creator<itemProduct>() {
+        @Override
+        public itemProduct createFromParcel(Parcel in) {
+            return new itemProduct(in);
+        }
+
+        @Override
+        public itemProduct[] newArray(int size) {
+            return new itemProduct[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int i) {
+        dest.writeInt(image);
+        dest.writeString(title);
+        dest.writeString(store);
+        dest.writeString(location);
+        dest.writeString(phone);
+        dest.writeString(description);
     }
 
     public String getStore() {
@@ -100,6 +143,13 @@ public class itemProduct {
         this.description = description;
     }
 
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
 
     @Override
     public String toString() {
@@ -111,5 +161,7 @@ public class itemProduct {
                 ", description= '"+ description + '\'' +
                 '}';
     }
+
+
 
 }

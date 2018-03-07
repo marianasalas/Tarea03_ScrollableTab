@@ -107,6 +107,15 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
             }
         });
 
+        holder.mEventLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ActivityProduct.class);
+                intent.putExtra("ITEM", mDataSet.get(position));
+                ((ActivityMain) context).startActivityForResult(intent, mDataSet.get(position).getCode());
+            }
+        });
+
     }
     public int getItemCount(){
         return mDataSet.size();
