@@ -37,6 +37,7 @@ public class itemProduct implements Parcelable{
         location = in.readString();
         phone = in.readString();
         description = in.readString();
+        code = in.readInt();
 
     }
 
@@ -47,10 +48,10 @@ public class itemProduct implements Parcelable{
         location = "";
         phone = "";
         description = "";
-        code = 1;
+
     }
 
-    public itemProduct(String title, String store, String location, String phone, String description, int image, int thumbnail) {
+    public itemProduct(String title, String store, String location, String phone, String description, int image, int thumbnail, int code) {
         this.title = title;
         this.store = store;
         this.image = image;
@@ -58,6 +59,7 @@ public class itemProduct implements Parcelable{
         this.location = location;
         this.phone = phone;
         this.description = description;
+        this.code = code;
     }
 
     public static final Creator<itemProduct> CREATOR = new Creator<itemProduct>() {
@@ -85,6 +87,7 @@ public class itemProduct implements Parcelable{
         dest.writeString(location);
         dest.writeString(phone);
         dest.writeString(description);
+        dest.writeInt(code);
     }
 
     public String getStore() {
@@ -159,6 +162,7 @@ public class itemProduct implements Parcelable{
                 ", location='" + location + '\'' +
                 ", phone='" + phone + '\'' +
                 ", description= '"+ description + '\'' +
+                ", code= '" + code + '\'' +
                 '}';
     }
 

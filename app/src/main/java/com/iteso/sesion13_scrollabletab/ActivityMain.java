@@ -127,23 +127,7 @@ public class ActivityMain extends AppCompatActivity {
             LinearLayoutManager miLayoutManager = new LinearLayoutManager(getActivity());
             recyclerView.setLayoutManager(miLayoutManager);
 
-
             ArrayList<itemProduct> products = new ArrayList<>();
-
-            products.add(new itemProduct(getString(R.string.title_item1),
-                    getString(R.string.store_item1), getString(R.string.location_item1),
-                    getString(R.string.phone_item1),getString(R.string.description_item1),
-                    0, 0 ));
-
-            products.add(new itemProduct(getString(R.string.title_item2),
-                    getString(R.string.store_item2), getString(R.string.location_item2),
-                    getString(R.string.phone_item2),getString(R.string.description_item2),
-                    0, 0 ));
-
-            products.add(new itemProduct(getString(R.string.title_item3),
-                    getString(R.string.store_item3), getString(R.string.location_item3),
-                    getString(R.string.phone_item3),getString(R.string.description_item3),
-                    0, 0 ));
 
             AdapterProduct adapterProduct = new AdapterProduct(getActivity(), products);
             recyclerView.setAdapter(adapterProduct);
@@ -155,7 +139,7 @@ public class ActivityMain extends AppCompatActivity {
 
 
     public void onActivityResult(int requestCode,int resultCode, Intent data){
-        if(requestCode == 1){
+        if(requestCode == 0 ||requestCode == 1|| requestCode ==  2){
             if(resultCode == Activity.RESULT_OK){
                 fragmentTechnology.onActivityResult(requestCode, resultCode, data);
             }
@@ -202,7 +186,7 @@ public class ActivityMain extends AppCompatActivity {
             switch (position){
                 case 0: return getString(R.string.title_section1).toUpperCase();
                 case 1: return getString(R.string.title_section2).toUpperCase();
-                case 2: getString(R.string.title_section3).toUpperCase();
+                case 2: return  getString(R.string.title_section3).toUpperCase();
             }
             return null;
         }

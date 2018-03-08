@@ -28,12 +28,11 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
 
     public AdapterProduct(Context context, ArrayList<itemProduct> myDataSet) {
         mDataSet = myDataSet;
-        this.context = context;
+        this.context = context;//aris was here
     }
 
     @Override
-    public AdapterProduct.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                        int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_product, parent, false);
         ViewHolder vh = new ViewHolder(v);
@@ -65,6 +64,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
 
 
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+
             holder.mProductTitle.setText(mDataSet.get(position).getTitle());
             holder.mProductStore.setText(mDataSet.get(position).getStore());
             holder.mProductLocation.setText(mDataSet.get(position).getLocation());
@@ -100,19 +100,21 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
                                               }
     });
 
-        holder.mDetail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context,mDataSet.get(position).toString(),Toast.LENGTH_LONG).show();
-            }
-        });
-
         holder.mEventLayout.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
+                itemProduct productItem = new itemProduct();
+                productItem.setTitle(mDataSet.get(position).getTitle());
+                productItem.setStore(mDataSet.get(position).getStore());
+                productItem.setPhone(mDataSet.get(position).getPhone());
+                productItem.setLocation(mDataSet.get(position).getLocation());
+                productItem.setCode(mDataSet.get(position).getCode());
+                productItem.setImage(mDataSet.get(position).getImage());
+
                 Intent intent = new Intent(context, ActivityProduct.class);
-                intent.putExtra("ITEM", mDataSet.get(position));
-                ((ActivityMain) context).startActivityForResult(intent, mDataSet.get(position).getCode());
+                intent.putExtra("ITEM", productItem);
+                ((ActivityMain) context).startActivityForResult(intent,mDataSet.get(position).getCode());
             }
         });
 

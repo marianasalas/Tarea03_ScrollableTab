@@ -12,9 +12,9 @@ import android.widget.ImageView;
 import com.iteso.sesion13_scrollabletab.Beans.itemProduct;
 
 public class ActivityProduct extends AppCompatActivity {
-EditText title, store,location;
+EditText title, store,location, phone;
 ImageView image;
-itemProduct itemProduct;
+itemProduct itemProduct, productItem;
 Button save, cancel;
 
     @Override
@@ -28,6 +28,8 @@ Button save, cancel;
         image = (ImageView) findViewById(R.id.activity_product_image);
         save = findViewById(R.id.activity_product_save);
         cancel = findViewById(R.id.activity_product_cancel);
+        phone = findViewById(R.id.activity_product_phone);
+
 
         if(getIntent().getExtras() != null) {
             itemProduct = getIntent().getParcelableExtra("ITEM");
@@ -35,6 +37,7 @@ Button save, cancel;
                 title.setText(itemProduct.getTitle());
                 store.setText(itemProduct.getStore());
                 location.setText(itemProduct.getLocation());
+                phone.setText(itemProduct.getPhone());
                 switch (itemProduct.getImage()) {
                     case 0:
                         image.setImageResource(R.drawable.mac);
@@ -60,11 +63,16 @@ Button save, cancel;
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                itemProduct.setTitle(title.getText().toString());
-                itemProduct.setStore(store.getText().toString());
-                itemProduct.setLocation(location.getText().toString());
+                productItem = new itemProduct();
+                productItem.setTitle(title.getText().toString());
+                productItem.setStore(store.getText().toString());
+                productItem.setLocation(location.getText().toString());
+                productItem.setPhone(phone.getText().toString());
+                productItem.setCode(itemProduct.getCode());
+                productItem.setImage(itemProduct.getImage());
+
                 Intent intent = new Intent();
-                intent.putExtra("ITEM", itemProduct);
+                intent.putExtra("ITEM", productItem);
                 setResult(Activity.RESULT_OK, intent);
                 finish();
             }
