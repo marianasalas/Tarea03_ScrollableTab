@@ -2,6 +2,7 @@ package com.iteso.sesion13_scrollabletab;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -82,17 +83,33 @@ public class ActivityMain extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()){
+            case R.id.action_logOut:
+                LogOut();
+                return true;
+            case R.id.action_privacy:
+                PrivacyPolicy();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void LogOut(){
+        SharedPreferences sharedPreferences=getSharedPreferences("iteso.com.USER_PREFERENCES",MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+        Intent intent2= new Intent(ActivityMain.this,ActivityLogin.class);
+        intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent2);
+        finish();
+    }
+
+    public void PrivacyPolicy(){
+        Intent intent = new Intent(ActivityMain.this,
+                ActivityPrivacyPolicy.class);
+        startActivity(intent);
     }
 
     /**
