@@ -33,4 +33,15 @@
     <string name="action_privacy">Privacy Policy</string>
     <string name="preferences_file_key">com.iteso.USER_PREFERENCES</string>
     <string name="url">https://www.iteso.mx</string>
+
+    <string name="save">GUARDAR</string>
+    <string name="itemTitle">Introduce title</string>
+    <string name="welcome">WELCOME TO PREFERENCES</string>
+
+    <string-array name="images">
+        <item>alienware</item>
+        <item>lanix</item>
+        <item>mac</item>
+    </string-array>
+
 </resources>

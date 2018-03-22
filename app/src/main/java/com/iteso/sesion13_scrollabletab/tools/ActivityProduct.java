@@ -36,9 +36,9 @@ Button save, cancel;
             itemProduct = getIntent().getParcelableExtra("ITEM");
             if (itemProduct != null) {
                 title.setText(itemProduct.getTitle());
-                store.setText(itemProduct.getStore());
-                location.setText(itemProduct.getLocation());
-                phone.setText(itemProduct.getPhone());
+             //   store.setText(itemProduct.getStore());
+             //   location.setText(itemProduct.getLocation());
+             //   phone.setText(itemProduct.getPhone());
                 switch (itemProduct.getImage()) {
                     case 0:
                         image.setImageResource(R.drawable.mac);
@@ -66,9 +66,9 @@ Button save, cancel;
             public void onClick(View view) {
                 productItem = new itemProduct();
                 productItem.setTitle(title.getText().toString());
-                productItem.setStore(store.getText().toString());
-                productItem.setLocation(location.getText().toString());
-                productItem.setPhone(phone.getText().toString());
+          //      productItem.setStore(store.getText().toString());
+          //      productItem.setLocation(location.getText().toString());
+          //      productItem.setPhone(phone.getText().toString());
                 productItem.setCode(itemProduct.getCode());
                 productItem.setImage(itemProduct.getImage());
 

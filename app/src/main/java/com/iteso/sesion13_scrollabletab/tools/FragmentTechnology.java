@@ -42,23 +42,6 @@ public class FragmentTechnology extends android.support.v4.app.Fragment {
         productstech = itemProductControl.getitemProductByCategory(0,
                 DataBaseHandler.getInstance(getActivity()));
 
-/**
-        productstech= new ArrayList<itemProduct>();
-        productstech.add(new itemProduct(getString(R.string.title_item1),
-                getString(R.string.store_item1), getString(R.string.location_item1),
-                getString(R.string.phone_item1),getString(R.string.description_item1),
-                0, 0 ,0));
-
-        productstech.add(new itemProduct(getString(R.string.title_item2),
-                getString(R.string.store_item2), getString(R.string.location_item2),
-                getString(R.string.phone_item2),getString(R.string.description_item2),
-                1, 1,1 ));
-
-        productstech.add(new itemProduct(getString(R.string.title_item3),
-                getString(R.string.store_item3), getString(R.string.location_item3),
-                getString(R.string.phone_item3),getString(R.string.description_item3),
-                2, 2,2 ));
-*/
         mAdapter = new AdapterProduct(getActivity(), productstech);
         recyclerView.setAdapter(mAdapter);
         itemProductControl = null;

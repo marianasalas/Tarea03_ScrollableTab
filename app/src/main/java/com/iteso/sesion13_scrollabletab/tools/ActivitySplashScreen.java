@@ -5,10 +5,12 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.iteso.sesion13_scrollabletab.Beans.City;
 import com.iteso.sesion13_scrollabletab.Beans.Store;
 import com.iteso.sesion13_scrollabletab.Beans.User;
 import com.iteso.sesion13_scrollabletab.R;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -24,26 +26,26 @@ public class ActivitySplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
 
         /**Al abrir la aplicación el ActivitySplashScreen deberá hacer una consulta a la BD para
-        obtener todas las tiendas con las que se cuentan mediante el método getStores, SOLO SI SE
-        TIENEN 0 tiendas se deberán crear 3 tiendas nuevas llamando al método addStore. Significa
-        que solo se insertaran una sola vez.
+         obtener todas las tiendas con las que se cuentan mediante el método getStores, SOLO SI SE
+         TIENEN 0 tiendas se deberán crear 3 tiendas nuevas llamando al método addStore. Significa
+         que solo se insertaran una sola vez.
          */
-        StoreControl storeControl = new StoreControl();
-        DataBaseHandler dh = DataBaseHandler.getInstance(ActivitySplashScreen.this);
-        storeControl.getStores(dh);
-        Store store1 = new Store();
-        Store store2 = new Store();
-        Store store3 = new Store();
-
-        if(storeControl.getStores(dh).isEmpty()){
-            storeControl.addStore(store1,dh);
-            storeControl.addStore(store2, dh);
-            storeControl.addStore(store3,dh);
-        }
-
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
+                StoreControl storeControl = new StoreControl();
+                DataBaseHandler dh = DataBaseHandler.getInstance(ActivitySplashScreen.this);
+                ArrayList<Store> stores = storeControl.getStores(dh);
+                Store store1 = new Store(0, "Dell", "555510036017", 2,5.1,6.0,new City(2, "Tequepexpan"));
+                Store store2 = new Store(1, "BestBuy", "3315474896", 0,5.1,6.0,new City(1, "Guadalajara"));
+                Store store3 = new Store(2, "St. Jhonny", "018001005664", 1,5.8,6.3,new City(7, "Tlaquepaque"));
+
+                if(stores.isEmpty()){
+                    storeControl.addStore(store1,dh);
+                    storeControl.addStore(store2, dh);
+                    storeControl.addStore(store3,dh);
+                }
+
                 User user = loadUser();
                 Intent intent;
                 if (user.isLogged()) {
@@ -56,6 +58,7 @@ public class ActivitySplashScreen extends AppCompatActivity {
                 finish();
             }
         };
+
         Timer timer = new Timer();
         timer.schedule(task, SPLASH_SCREEN_DELAY);
 

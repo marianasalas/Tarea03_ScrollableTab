@@ -16,16 +16,15 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".tools.ActivityProduct" />
-        <activity android:name=".tools.ActivitySplashScreen">
+        <activity android:name=".tools.ActivitySplashScreen"
+            android:theme="@style/AppTheme.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".tools.ActivityPrivacyPolicy" />
         <activity android:name=".tools.ActivityLogin" />
-        <activity android:name="DataBase.DataBaseHandler" />
         <activity android:name=".tools.ActivityItem"></activity>
     </application>
 

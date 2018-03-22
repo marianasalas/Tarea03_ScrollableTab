@@ -25,7 +25,6 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
     private ArrayList<itemProduct> mDataSet;
     private Context context;
 
-
     public AdapterProduct(Context context, ArrayList<itemProduct> myDataSet) {
         mDataSet = myDataSet;
         this.context = context;//aris was here
@@ -66,9 +65,9 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
             holder.mProductTitle.setText(mDataSet.get(position).getTitle());
-            holder.mProductStore.setText(mDataSet.get(position).getStore());
-            holder.mProductLocation.setText(mDataSet.get(position).getLocation());
-            holder.mProductPhone.setText(mDataSet.get(position).getPhone());
+            holder.mProductStore.setText(mDataSet.get(position).getStore().getName());
+            holder.mProductLocation.setText(mDataSet.get(position).getStore().getCity().getName());
+            holder.mProductPhone.setText(mDataSet.get(position).getStore().getPhone());
             switch(mDataSet.get(position).getImage()){
                 case 0:
                     holder.mProductImage.setImageResource(R.drawable.mac); break;
@@ -78,7 +77,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
                     holder.mProductImage.setImageResource(R.drawable.lanix);break;
             }
 
-            switch (mDataSet.get(position).getThumbnail()){
+           switch (mDataSet.get(position).getStore().getThumbnail()){
             case 0:
                 holder.mProductThumbnail.setImageResource(R.drawable.bestbuy);
                  break;
@@ -95,7 +94,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
                                               @Override
                                               public void onClick(View view) {
                                                   Intent call = new Intent (Intent.ACTION_DIAL, Uri.parse("tel: "+
-                                                          mDataSet.get(position).getPhone()));
+                                                          mDataSet.get(position).getStore().getPhone()));
                                                   context.startActivity(call);
                                               }
     });
@@ -107,10 +106,9 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
                 itemProduct productItem = new itemProduct();
                 productItem.setTitle(mDataSet.get(position).getTitle());
                 productItem.setStore(mDataSet.get(position).getStore());
-                productItem.setPhone(mDataSet.get(position).getPhone());
-                productItem.setLocation(mDataSet.get(position).getLocation());
                 productItem.setCode(mDataSet.get(position).getCode());
                 productItem.setImage(mDataSet.get(position).getImage());
+                productItem.setCategory(mDataSet.get(position).getCategory());
 
                 Intent intent = new Intent(context, ActivityProduct.class);
                 intent.putExtra("ITEM", productItem);
