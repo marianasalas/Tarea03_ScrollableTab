@@ -1,4 +1,4 @@
-package com.iteso.sesion13_scrollabletab;
+package com.iteso.sesion13_scrollabletab.tools;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.iteso.sesion13_scrollabletab.Beans.User;
+import com.iteso.sesion13_scrollabletab.R;
 
 public class ActivityLogin extends AppCompatActivity {
     EditText username, password;

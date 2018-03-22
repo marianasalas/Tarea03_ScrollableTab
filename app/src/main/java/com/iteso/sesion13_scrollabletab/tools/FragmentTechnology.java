@@ -1,8 +1,7 @@
-package com.iteso.sesion13_scrollabletab;
+package com.iteso.sesion13_scrollabletab.tools;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,15 +9,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.iteso.sesion13_scrollabletab.Beans.itemProduct;
+import com.iteso.sesion13_scrollabletab.R;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import DataBase.DataBaseHandler;
+import DataBase.ItemProductControl;
 
 
 public class FragmentTechnology extends android.support.v4.app.Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<itemProduct> productstech;
+
 
     public FragmentTechnology() {}
 
@@ -34,7 +38,11 @@ public class FragmentTechnology extends android.support.v4.app.Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
 
+        ItemProductControl itemProductControl = new ItemProductControl();
+        productstech = itemProductControl.getitemProductByCategory(0,
+                DataBaseHandler.getInstance(getActivity()));
 
+/**
         productstech= new ArrayList<itemProduct>();
         productstech.add(new itemProduct(getString(R.string.title_item1),
                 getString(R.string.store_item1), getString(R.string.location_item1),
@@ -50,9 +58,10 @@ public class FragmentTechnology extends android.support.v4.app.Fragment {
                 getString(R.string.store_item3), getString(R.string.location_item3),
                 getString(R.string.phone_item3),getString(R.string.description_item3),
                 2, 2,2 ));
-
+*/
         mAdapter = new AdapterProduct(getActivity(), productstech);
         recyclerView.setAdapter(mAdapter);
+        itemProductControl = null;
         return view;
     }
     @Override

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.iteso.sesion13_scrollabletab.ActivityProduct">
+    tools:context="com.iteso.sesion13_scrollabletab.tools.ActivityProduct">
 
     <ImageView
         android:id="@+id/activity_product_image"

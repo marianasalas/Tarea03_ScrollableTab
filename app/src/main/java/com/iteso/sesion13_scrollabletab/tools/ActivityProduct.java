@@ -1,4 +1,4 @@
-package com.iteso.sesion13_scrollabletab;
+package com.iteso.sesion13_scrollabletab.tools;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.iteso.sesion13_scrollabletab.Beans.itemProduct;
+import com.iteso.sesion13_scrollabletab.R;
 
 public class ActivityProduct extends AppCompatActivity {
 EditText title, store,location, phone;

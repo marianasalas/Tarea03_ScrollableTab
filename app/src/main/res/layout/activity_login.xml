@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.iteso.sesion13_scrollabletab.ActivityLogin">
+    tools:context="com.iteso.sesion13_scrollabletab.tools.ActivityLogin">
 
     <EditText
         android:id="@+id/activity_login_user"

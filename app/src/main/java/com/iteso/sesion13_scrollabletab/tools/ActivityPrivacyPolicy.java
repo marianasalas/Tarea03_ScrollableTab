@@ -1,4 +1,4 @@
-package com.iteso.sesion13_scrollabletab;
+package com.iteso.sesion13_scrollabletab.tools;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.iteso.sesion13_scrollabletab.Beans.WebAppInterface;
+import com.iteso.sesion13_scrollabletab.R;
 
 public class ActivityPrivacyPolicy extends AppCompatActivity implements
         DialogInterface.OnKeyListener{

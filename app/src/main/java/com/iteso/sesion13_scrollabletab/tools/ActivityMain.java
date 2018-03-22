@@ -1,4 +1,4 @@
-package com.iteso.sesion13_scrollabletab;
+package com.iteso.sesion13_scrollabletab.tools;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 
 
 import com.iteso.sesion13_scrollabletab.Beans.itemProduct;
+import com.iteso.sesion13_scrollabletab.R;
 
 import java.util.ArrayList;
 
@@ -66,8 +67,8 @@ public class ActivityMain extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(ActivityMain.this, ActivityItem.class);
+                startActivity(intent);
             }
         });
 

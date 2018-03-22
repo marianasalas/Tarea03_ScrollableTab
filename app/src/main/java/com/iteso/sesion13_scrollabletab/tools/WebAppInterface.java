@@ -1,4 +1,4 @@
-package com.iteso.sesion13_scrollabletab.Beans;
+package com.iteso.sesion13_scrollabletab.tools;
 
 import android.content.Context;
 import android.webkit.JavascriptInterface;

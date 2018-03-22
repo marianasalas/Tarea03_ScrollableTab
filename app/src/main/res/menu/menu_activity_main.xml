@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.iteso.sesion13_scrollabletab.ActivityMain">
+    tools:context="com.iteso.sesion13_scrollabletab.tools.ActivityMain">
     <item
         android:id="@+id/action_logOut"
         android:orderInCategory="100"
