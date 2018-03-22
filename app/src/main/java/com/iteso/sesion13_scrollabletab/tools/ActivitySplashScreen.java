@@ -36,10 +36,11 @@ public class ActivitySplashScreen extends AppCompatActivity {
                 StoreControl storeControl = new StoreControl();
                 DataBaseHandler dh = DataBaseHandler.getInstance(ActivitySplashScreen.this);
                 ArrayList<Store> stores = storeControl.getStores(dh);
-                Store store1 = new Store(0, "Dell", "555510036017", 2,5.1,6.0,new City(2, "Tequepexpan"));
-                Store store2 = new Store(1, "BestBuy", "3315474896", 0,5.1,6.0,new City(1, "Guadalajara"));
-                Store store3 = new Store(2, "St. Jhonny", "018001005664", 1,5.8,6.3,new City(7, "Tlaquepaque"));
+                Store store1 = new Store(0, "Dell", "555510036017", 0,5.1,6.0,new City(2, "Guadalajara"));
+                Store store2 = new Store(1, "BestBuy", "3315474896", 0,5.1,6.0,new City(12, "Guadalajara"));
+                Store store3 = new Store(2, "St. Jhonny", "018001005664", 0,5.8,6.3,new City(2, "Guadalajara"));
 
+                storeControl.deleteStore(0,dh);
                 if(stores.isEmpty()){
                     storeControl.addStore(store1,dh);
                     storeControl.addStore(store2, dh);

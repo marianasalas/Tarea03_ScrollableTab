@@ -44,10 +44,7 @@ public class Category implements Parcelable {
 
     @Override
     public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return this.getName();
     }
 
     public static final Creator<Category> CREATOR = new Creator<Category>() {

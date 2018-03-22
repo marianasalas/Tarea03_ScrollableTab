@@ -22,6 +22,13 @@ public class CategoryControl {
 
         SQLiteDatabase db = dh.getReadableDatabase();
         Cursor cursor= db.rawQuery(select, null );
+        while(cursor.moveToNext()) {
+            Category category = new Category();
+            category.setId(cursor.getInt(0));
+            category.setName(cursor.getString(1));
+            categories.add(category);
+        }
+
         try{
             cursor.close(); //SIEMPRE CERRAR PRIMERO EL CURSOR
             db.close();

@@ -39,7 +39,7 @@ public class DataBaseHandler extends SQLiteOpenHelper{
     public static final String KEY_PRODUCT_IMAGE = "image";
     public static final String KEY_PRODUCT_CATEGORY = "idCategory";
     //Column StoreProduct
-    public static final String KEY_SP_ID = "id";
+    public static final String KEY_SP_ID = "idStoreProduct";
     public static final String KEY_SP_PRODUCT = "idProduct";
     public static final String KEY_SP_STORE = "idStore";
 
@@ -86,8 +86,8 @@ public class DataBaseHandler extends SQLiteOpenHelper{
 
         String CREATE_STOREPRODUCT_TABLE = "CREATE TABLE " + TABLE_STOREPRODUCT + "("
                 + KEY_SP_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + KEY_SP_PRODUCT + "INTEGER,"
-                + KEY_SP_STORE + "INTEGER";
+                + KEY_SP_PRODUCT + " INTEGER,"
+                + KEY_SP_STORE + " INTEGER)";
         db.execSQL(CREATE_STOREPRODUCT_TABLE);
 
         db.execSQL("INSERT INTO " + TABLE_CATEGORY + " (" + KEY_CATEGORY_NAME + ") VALUES"+
@@ -129,8 +129,6 @@ public class DataBaseHandler extends SQLiteOpenHelper{
         switch (oldVersion) {
             case 1:
                 upgradeVersion2(db);
-            case 2:
-                upgradeVersion3(db);
                 break;
         }
 
@@ -141,8 +139,5 @@ public class DataBaseHandler extends SQLiteOpenHelper{
                 "KEY_NEWCOLUMN" + " text not null");
     }
 
-    public void upgradeVersion3(SQLiteDatabase db) {
-        db.execSQL("ALTER TABLE " + "TABLE_SUBJECT" + " ADD COLUMN " +
-                "KEY_NEWCOLUMN" + " text not null");
-    }
+
 }

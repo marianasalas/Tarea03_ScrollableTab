@@ -29,7 +29,9 @@ import com.iteso.sesion13_scrollabletab.R;
 import java.util.ArrayList;
 
 public class ActivityMain extends AppCompatActivity {
-
+    public FragmentTechnology fragmentTechnology;
+    public FragmentHome fragmentHome;
+    public FragmentElectronics fragmentElectronics;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -153,11 +155,9 @@ public class ActivityMain extends AppCompatActivity {
         }
     }
 
-    FragmentTechnology fragmentTechnology;
-
-
-    public void onActivityResult(int requestCode,int resultCode, Intent data){
-        if(requestCode == 0 ||requestCode == 1|| requestCode ==  2){
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 0 || requestCode == 1 || requestCode == 2){
             if(resultCode == Activity.RESULT_OK){
                 fragmentTechnology.onActivityResult(requestCode, resultCode, data);
             }
@@ -184,9 +184,15 @@ public class ActivityMain extends AppCompatActivity {
                     }
                     return fragmentTechnology;
                 case 1:
-                    return new FragmentHome();
+                    if( fragmentHome== null){
+                    fragmentHome = new FragmentHome();
+                }
+                return fragmentHome;
                 case 2:
-                    return new FragmentElectronics();
+                    if( fragmentElectronics== null){
+                        fragmentElectronics = new FragmentElectronics();
+                    }
+                    return fragmentElectronics;
                 default:
                     return new FragmentTechnology();
 

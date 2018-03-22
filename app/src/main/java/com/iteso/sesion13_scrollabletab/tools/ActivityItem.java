@@ -1,7 +1,9 @@
 package com.iteso.sesion13_scrollabletab.tools;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -42,26 +44,30 @@ public class ActivityItem extends AppCompatActivity {
         dh = DataBaseHandler.getInstance(ActivityItem.this);
         CategoryControl categoryControl = new CategoryControl();
         StoreControl storeControl = new StoreControl();
-        final ItemProductControl itemProductControl = new ItemProductControl();
 
         ArrayList<Category> categoryArrayList = categoryControl.getCategories(dh);
         ArrayList<Store> storeArrayList = storeControl.getStores(dh);
 
-        ArrayAdapter<Category> categoryAdapter = new ArrayAdapter<>(this,R.layout.activity_item, categoryArrayList);
+        ArrayAdapter<Category> categoryAdapter = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item, categoryArrayList);
+        ArrayAdapter<Store> storeAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, storeArrayList);
+
+        categoryAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        storeAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         categories.setAdapter(categoryAdapter);
-        ArrayAdapter<Store> storeAdapter = new ArrayAdapter<>(this, R.layout.activity_item, storeArrayList);
         stores.setAdapter(storeAdapter);
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ItemProductControl itemProductControl = new ItemProductControl();
                 itemProduct itemProduct = new itemProduct();
                 itemProduct.setStore((Store) stores.getSelectedItem());
                 itemProduct.setTitle(title.getText().toString());
+                itemProduct.setImage(getResources().getIdentifier(images.getSelectedItem().toString(), "drawable", getPackageName()));
                 itemProduct.setCategory((Category) categories.getSelectedItem());
+                itemProduct.setDescription("Description");
 
                 itemProductControl.addItemProduct(itemProduct,dh);
-
                 finish();
             }
         });

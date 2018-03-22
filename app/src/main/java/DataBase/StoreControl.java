@@ -69,10 +69,11 @@ public class StoreControl {
                 + "S." + DataBaseHandler.KEY_STORE_THUMBNAIL + ","
                 + "C." + DataBaseHandler.KEY_CITY_ID + ","
                 + "C." + DataBaseHandler.KEY_CITY_NAME + " FROM "
-                + DataBaseHandler.TABLE_STORE + " S, "
-                + DataBaseHandler.TABLE_CITY + " C WHERE S."
+                + DataBaseHandler.TABLE_STORE + " S INNER JOIN "
+                + DataBaseHandler.TABLE_CITY + " C ON S."
                 + DataBaseHandler.KEY_STORE_CITY
-                + " = C." + DataBaseHandler.KEY_CITY_ID;
+                + " = C." + DataBaseHandler.KEY_CITY_ID + " WHERE S. "
+                + DataBaseHandler.KEY_STORE_ID + " = " + idStore;
 
         SQLiteDatabase db = dh.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -99,7 +100,7 @@ public class StoreControl {
 
     public ArrayList<Store> getStores(DataBaseHandler dh){
         ArrayList<Store> stores = new ArrayList<>();
-        Store store = new Store();
+
         String select = "SELECT S." + DataBaseHandler.KEY_STORE_ID + ","
                 + "S." + DataBaseHandler.KEY_STORE_LAT + ","
                 + "S." + DataBaseHandler.KEY_STORE_LNG + ","
@@ -115,6 +116,7 @@ public class StoreControl {
         SQLiteDatabase db = dh.getReadableDatabase();
         Cursor cursor= db.rawQuery(select, null );
         while (cursor.moveToNext()) {
+            Store store = new Store();
             store.setId(cursor.getInt(0));
             store.setLatitude(cursor.getDouble(1));
             store.setLongitude(cursor.getDouble(2));

@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.iteso.sesion13_scrollabletab.Beans.itemProduct;
 import com.iteso.sesion13_scrollabletab.R;
@@ -99,7 +100,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
                                               }
     });
 
-        holder.mEventLayout.setOnClickListener(new View.OnClickListener() {
+    /**    holder.mEventLayout.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -114,7 +115,13 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
                 intent.putExtra("ITEM", productItem);
                 ((ActivityMain) context).startActivityForResult(intent,mDataSet.get(position).getCode());
             }
-        });
+        });*/
+    holder.mDetail.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(view.getContext(), mDataSet.get(position).toString(), Toast.LENGTH_SHORT).show();
+        }
+    });
 
     }
     public int getItemCount(){
